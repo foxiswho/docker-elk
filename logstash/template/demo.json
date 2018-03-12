@@ -1,0 +1,123 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "ik_syno_max": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": [
+            "local_synonym_filter",
+            "jt_tfr",
+            "stemmer"
+          ],
+          "char_filter": [
+            "jt_cfr"
+          ]
+        },
+        "ik_syno_smart": {
+          "type": "custom",
+          "tokenizer": "ik_smart",
+          "filter": [
+            "local_synonym_filter",
+            "stemmer"
+          ]
+        },
+        "synonym": {
+          "tokenizer": "whitespace",
+          "filter": [
+            "local_synonym_filter"
+          ]
+        },
+        "english": {
+          "tokenizer":  "standard",
+          "filter": [
+            "english_possessive_stemmer",
+            "lowercase",
+            "english_stop",
+            "english_keywords",
+            "english_stemmer"
+          ]
+        }
+      },
+      "filter": {
+        "jt_tfr": {
+          "type": "stop",
+          "stopwords": [
+            " "
+          ]
+        },
+        // "remote_synonym": {
+        //  "type": "synonym",
+        //  "synonyms_path": "http://www.hwbang.com/Public/thesaurus/synonyms.txt",
+        //  "interval": 60
+        // },
+        "local_synonym_filter": {
+          "type": "synonym",
+          "synonyms_path": "synonyms.txt"
+        },
+        "english_stop": {
+          "type":       "stop",
+          "stopwords":  "_english_"
+        },
+        "english_keywords": {
+          "type":       "keyword_marker",
+          "keywords":   ["example"]
+        },
+        "english_stemmer": {
+          "type":       "stemmer",
+          "language":   "english"
+        },
+        "english_possessive_stemmer": {
+          "type":       "stemmer",
+          "language":   "possessive_english"
+        }
+      },
+      "char_filter": {
+        "jt_cfr": {
+          "type": "mapping",
+          "mappings": [
+            "| => \\|"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "dynamic": true,
+      // 是否启用“动态修改索引”
+      "properties": {
+        "title": {
+          "type": "text",
+          "analyzer": "ik_syno_max",
+          "search_analyzer": "ik_syno_max",
+          "fields": {
+            "cn": {
+              "type": "text"
+            },
+            "en": {
+              "type": "text"
+            }
+          }
+        },
+        "title_all": {
+          "type": "text",
+          "analyzer": "ik_syno_smart",
+          "search_analyzer": "ik_syno_smart",
+          "fields": {
+            "cn": {
+              "type": "text",
+              "analyzer": "ik_syno_smart",
+              "search_analyzer": "ik_syno_smart"
+            },
+            "en": {
+              "type": "text",
+              "analyzer": "english",
+              "search_analyzer": "ik_syno_smart"
+            }
+          }
+        }
+      }
+    }
+  }
+}

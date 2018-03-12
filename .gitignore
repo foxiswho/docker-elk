@@ -1,0 +1,8 @@
+*.bak
+*humbs.db
+.idea
+.sass-cache
+_site
+!logstash/pipeline/jar/index.html
+!logstash/pipeline/tmp/index.html
+logstash/pipeline/tmp/*

@@ -1,0 +1,67 @@
+version: '3.5'
+
+services:
+
+  elasticsearch:
+    build:
+      context: elasticsearch/
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      elk:
+          aliases:
+            - elasticsearch
+
+  logstash:
+    build:
+      context: logstash/
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      elk:
+          aliases:
+            - logstash
+#      my-lnmp:
+#          aliases:
+#            - logstash
+    depends_on:
+      - elasticsearch
+    #external_links:
+    #  - mariadb:mysqlhost
+      # 链接其他 已经建立好的mysql容器
+    #extra_hosts:
+      # mysql IP地址映射
+    #  - "mysqlhost:192.168.31.108"
+    # docker network connect bridge logstash
+
+  kibana:
+    build:
+      context: kibana/
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    networks:
+      elk:
+          aliases:
+            - kibana
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk:
+    driver: bridge
+  my-lnmp:
+       external: true
+#以上为案例 自定义网桥
