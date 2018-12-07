@@ -1,0 +1,76 @@
+version: '3.5'
+# 无法下载 镜像情况下解决方法
+services:
+
+  elasticsearch:
+    build:
+      images: foxiswho/elk:elasticsearch-6.5.2
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
+      #- ./elasticsearch/plugins/analysis-ik:/usr/share/elasticsearch/plugins/analysis-ik
+     #- ./elasticsearch/data:/usr/share/elasticsearch/data
+     # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      elk:
+          aliases:
+            - elasticsearch
+
+  logstash:
+    build:
+      images: foxiswho/elk:logstash-6.5.2
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      elk:
+          aliases:
+            - logstash
+#      my-lnmp:
+#          aliases:
+#            - logstash
+    depends_on:
+      - elasticsearch
+    #external_links:
+    #  - mariadb:mysqlhost
+      # 链接其他 已经建立好的mysql容器
+    #extra_hosts:
+      # mysql IP地址映射
+    #  - "mysqlhost:192.168.31.108"
+    # docker network connect bridge logstash
+
+  kibana:
+    build:
+      images: foxiswho/elk:kibana-6.5.2
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      elk:
+          aliases:
+            - kibana
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk:
+    driver: bridge
+#  my-lnmp:
+#       external: true
+#以上为案例 自定义网桥
