@@ -5,6 +5,8 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -24,6 +26,8 @@ services:
   logstash:
     build:
       context: logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
@@ -51,8 +55,10 @@ services:
   kibana:
     build:
       context: kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
+      - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
     ports:
       - "5601:5601"
     networks:

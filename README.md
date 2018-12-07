@@ -188,3 +188,19 @@ http://yukinami.github.io/2017/03/24/Docker-compose%E4%BD%BF%E7%94%A8%E9%BB%98%E
 #  其他
 原始容器来自  https://github.com/deviantony/docker-elk.git
 
+# Elastic stack (ELK) on Docker
+
+[![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Elastic Stack version](https://img.shields.io/badge/ELK-6.4.2-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/332)
+[![Build Status](https://api.travis-ci.org/deviantony/docker-elk.svg?branch=master)](https://travis-ci.org/deviantony/docker-elk)
+
+Run the latest version of the [Elastic stack](https://www.elastic.co/elk-stack) with Docker and Docker Compose.
+
+It will give you the ability to analyze any data set by using the searching/aggregation capabilities of Elasticsearch
+and the visualization power of Kibana.
+
+Based on the official Docker images from Elastic:
+
+* [elasticsearch](https://github.com/elastic/elasticsearch-docker)
+* [logstash](https://github.com/elastic/logstash-docker)
+* [kibana](https://github.com/elastic/kibana-docker)
