@@ -6,7 +6,7 @@ services:
     build:
       images: foxiswho/elk:elasticsearch-6.5.2
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 6.5.2
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -27,7 +27,7 @@ services:
     build:
       images: foxiswho/elk:logstash-6.5.2
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 6.5.2
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
@@ -56,7 +56,7 @@ services:
     build:
       images: foxiswho/elk:kibana-6.5.2
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 6.5.2
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
     ports:
