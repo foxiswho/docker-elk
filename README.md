@@ -10,13 +10,7 @@ cd docker-elk
 
 使用说明，可以`配合`其他容器使用，也可以`独立使用`
 # 基本配置
-## 注意.拉取镜像速度非常慢
-可以先手工拉取镜像
-```SHELL
-docker pull docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2
-docker pull docker.elastic.co/kibana/kibana-oss:6.2.2
-docker pull docker.elastic.co/logstash/logstash-oss:6.2.2
-```
+## 注意.端口
 
 在安装组件之前需要确保以下端口没有被占用:5601 (Kibana), 9200 (Elasticsearch), and 5044 (Logstash).
 
