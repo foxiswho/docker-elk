@@ -35,9 +35,9 @@ services:
       elk:
           aliases:
             - logstash
-#      my-lnmp:
-#          aliases:
-#            - logstash
+      my-lnmp:
+          aliases:
+            - logstash
     depends_on:
       - elasticsearch
     #external_links:
@@ -65,6 +65,6 @@ services:
 networks:
   elk:
     driver: bridge
-#  my-lnmp:
-#       external: true
+  my-lnmp:
+       external: true
 #以上为案例 自定义网桥

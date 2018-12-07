@@ -1,4 +1,5 @@
 version: '3.5'
+# 合作使用
 
 services:
 
@@ -9,15 +10,19 @@ services:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
       #- ./elasticsearch/plugins/analysis-ik:/usr/share/elasticsearch/plugins/analysis-ik
-     #- ./elasticsearch/data:/usr/share/elasticsearch/data
-     # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
+      #- ./elasticsearch/data:/usr/share/elasticsearch/data
+      # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
     ports:
       - "9200:9200"
       - "9300:9300"
+    hostname: elasticsearch
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       elk:
+          aliases:
+            - elasticsearch
+      swoole:
           aliases:
             - elasticsearch
 
@@ -26,27 +31,28 @@ services:
       context: logstash/
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5000:5000"
+    hostname: logstash
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       elk:
           aliases:
             - logstash
-#      my-lnmp:
-#          aliases:
-#            - logstash
+      swoole:
+          aliases:
+            - logstash
     depends_on:
       - elasticsearch
     #external_links:
-    #  - mariadb:mysqlhost
+    #  - mysqlhost:mysqlhost
       # 链接其他 已经建立好的mysql容器
     #extra_hosts:
       # mysql IP地址映射
     #  - "mysqlhost:192.168.31.108"
-    # docker network connect bridge logstash
+    # docker network connect my-lnmp logstash
 
   kibana:
     build:
@@ -59,12 +65,16 @@ services:
       elk:
           aliases:
             - kibana
+      swoole:
+          aliases:
+            - kibana
     depends_on:
       - elasticsearch
 
 networks:
   elk:
+    name: elk
     driver: bridge
-#  my-lnmp:
-#       external: true
+  swoole:
+       external: true
 #以上为案例 自定义网桥
