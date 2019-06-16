@@ -26,6 +26,7 @@ RUN mkdir -p /data \
 && unzip elasticsearch-analysis-ik.zip -d elasticsearch-analysis-ik\
 && mv -f ./elasticsearch-analysis-ik/* ./analysis-ik/ \
 && rm -rf elasticsearch-analysis-ik.zip \
+&& rm -rf /data/elasticsearch-analysis-ik-${ELK_VERSION}.zip \
 && rm -rf elasticsearch-analysis-ik \
 && ls -a ./ \
 && ls -a ./analysis-ik/ \
