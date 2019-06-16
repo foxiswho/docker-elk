@@ -10,5 +10,7 @@ FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
 ENV ELK_VERSION=7.1.1
 
 # https://github.com/medcl/elasticsearch-analysis-ik
-#RUN elasticsearch-plugin install xxx
-RUN mkdir -p /data && cd /data && wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ELK_VERSION}/elasticsearch-analysis-ik-${ELK_VERSION}.zip
+
+RUN elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ELK_VERSION}/elasticsearch-analysis-ik-${ELK_VERSION}.zip
+
+#RUN mkdir -p /data && cd /data && wget
