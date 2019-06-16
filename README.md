@@ -25,6 +25,9 @@ sudo sysctl -w vm.max_map_count=262144
 ```
 
 ## 先下载 词库，如果你不需要词库 请PASS
+
+>注意：词库 7.1.1 默认安装了，不需要安装了
+
 https://github.com/medcl/elasticsearch-analysis-ik/releases
 ```SHELL
 wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.1.1/elasticsearch-analysis-ik-7.1.1.zip
