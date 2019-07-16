@@ -15,6 +15,8 @@ ENV ELK_VERSION=7.2.0
 
 #RUN elasticsearch-plugin install /data/elasticsearch-analysis-ik-${ELK_VERSION}.zip
 
+RUN yum -y update && yum -y install wget
+
 RUN mkdir -p /data \
 && cd /data \
 && wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ELK_VERSION}/elasticsearch-analysis-ik-${ELK_VERSION}.zip \
@@ -35,6 +37,8 @@ RUN mkdir -p /data \
 && cat analysis-ik/config/IKAnalyzer.cfg.xml
 
 
+
+RUN yum clean all
 
 
 
