@@ -4,12 +4,13 @@ services:
 
   elasticsearch:
     build:
-      images: foxiswho/elk:elasticsearch-6.5.2
+      images: foxiswho/elk:elasticsearch-7.1.1
       args:
-        ELK_VERSION: 6.5.2
+        ELK_VERSION: 7.1.1
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
+      #词库 7.1.1 默认安装了
       #- ./elasticsearch/plugins/analysis-ik:/usr/share/elasticsearch/plugins/analysis-ik
      #- ./elasticsearch/data:/usr/share/elasticsearch/data
      # elasticsearch/data 数据存储目录,记得本目录设置 777 可写权限，否则启动不成功
@@ -25,9 +26,9 @@ services:
 
   logstash:
     build:
-      images: foxiswho/elk:logstash-6.5.2
+      images: foxiswho/elk:logstash-7.1.1
       args:
-        ELK_VERSION: 6.5.2
+        ELK_VERSION: 7.1.1
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
@@ -54,9 +55,9 @@ services:
 
   kibana:
     build:
-      images: foxiswho/elk:kibana-6.5.2
+      images: foxiswho/elk:kibana-7.1.1
       args:
-        ELK_VERSION: 6.5.2
+        ELK_VERSION: 7.1.1
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
     ports:
