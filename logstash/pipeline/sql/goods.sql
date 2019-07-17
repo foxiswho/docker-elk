@@ -9,5 +9,5 @@ g.is_del,
 g.is_open
 FROM
 goods as g
-where g.update_time > date_add(:sql_last_value, INTERVAL 8 HOUR)
+where g.gmt_modified > date_add(:sql_last_value, INTERVAL 8 HOUR)
 order by g.goods_id

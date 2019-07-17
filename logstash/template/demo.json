@@ -48,7 +48,7 @@
         },
         // "remote_synonym": {
         //  "type": "synonym",
-        //  "synonyms_path": "http://www.hwbang.com/Public/thesaurus/synonyms.txt",
+        //  "synonyms_path": "http://api.foxwho.com/thesaurus/synonyms.txt",
         //  "interval": 60
         // },
         "local_synonym_filter": {
@@ -83,7 +83,6 @@
     }
   },
   "mappings": {
-    "_doc": {
       "dynamic": true,
       // 是否启用“动态修改索引”
       "properties": {
@@ -118,6 +117,5 @@
           }
         }
       }
-    }
   }
 }
