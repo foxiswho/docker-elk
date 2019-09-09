@@ -72,6 +72,7 @@ chmod -R 777 ./logstash/pipeline
 
 # 独立使用 elasticsearch logstash kibana 容器
 ```console
+cd dc
 $ docker-compose up
 ```
 

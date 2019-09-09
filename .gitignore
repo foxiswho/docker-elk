@@ -5,4 +5,7 @@
 _site
 !logstash/pipeline/jar/index.html
 !logstash/pipeline/tmp/index.html
+!dc/logstash/pipeline/jar/index.html
+!dc/logstash/pipeline/tmp/index.html
 logstash/pipeline/tmp/*
+dc/logstash/pipeline/tmp/*

@@ -5,7 +5,7 @@ services:
 
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -29,7 +29,7 @@ services:
 
   logstash:
     build:
-      context: logstash/
+      context: logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline
@@ -57,7 +57,7 @@ services:
 
   kibana:
     build:
-      context: kibana/
+      context: kibana
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:

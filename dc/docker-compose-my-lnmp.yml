@@ -4,9 +4,7 @@ services:
 
   elasticsearch:
     build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
+      context: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - ./elasticsearch/config/synonyms.txt:/usr/share/elasticsearch/config/synonyms.txt:ro
@@ -26,9 +24,7 @@ services:
 
   logstash:
     build:
-      context: logstash/
-      args:
-        ELK_VERSION: $ELK_VERSION
+      context: logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
@@ -40,9 +36,9 @@ services:
       elk:
           aliases:
             - logstash
-#      my-lnmp:
-#          aliases:
-#            - logstash
+      my-lnmp:
+          aliases:
+            - logstash
     depends_on:
       - elasticsearch
     #external_links:
@@ -55,11 +51,9 @@ services:
 
   kibana:
     build:
-      context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
+      context: kibana
     volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/configkibana.yml
+      - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
@@ -72,6 +66,6 @@ services:
 networks:
   elk:
     driver: bridge
-#  my-lnmp:
-#       external: true
+  my-lnmp:
+       external: true
 #以上为案例 自定义网桥
