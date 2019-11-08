@@ -60,28 +60,65 @@ wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.1.1
 
 真正执行的时候，请删除 案例，否则报错
 
-## 目录权限
+## 容器内相关目录文件位置
+### elasticsearch  容器 内目录，文件 位置
+```bash
+#配置文件
+/usr/share/elasticsearch/config/elasticsearch.yml
+/usr/share/elasticsearch/config/synonyms.txt
 
-数据存储目录,目录设置 `777` 权限，否则启动不成功
+#词库配置文件
+/usr/share/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml
+
+#日志目录
+/usr/share/elasticsearch/logs
+
+#数据目录
+/usr/share/elasticsearch/data
+```
+
+### logstash  容器 内目录，文件 位置
+```bash
+#配置文件
+/usr/share/logstash/config/logstash.yml
+#日志目录
+/usr/share/logstash/logs
+
+#多任务配置目录
+/usr/share/logstash/pipeline
+
+```
+
+### kibana  容器 内目录，文件 位置
+```bash
+#配置文件
+/usr/share/kibana/config/kibana.yml
+```
+
+## 对外目录映射权限
+
+建立数据存储目录,并目录设置 `777` 权限，否则启动不成功
 
 ```YML
 chmod -R 777 ./elasticsearch/data
+chmod -R 777 ./elasticsearch/logs
 chmod -R 777 ./logstash/pipeline
+chmod -R 777 ./logstash/logs
 ```
 
 
 # 独立使用 elasticsearch logstash kibana 容器
-```console
+```bash
 cd dc
-$ docker-compose up
+./start.sh
 ```
 
 # 合作使用，配合其他容器
 
 例如：有个已经建立好的容器，他的网络是 `other`
 
-```console
-$ docker-compose up -f docker-compose-cooperation.yml
+```bash
+docker-compose up -f docker-compose-cooperation.yml
 ```
 
 
@@ -89,8 +126,8 @@ $ docker-compose up -f docker-compose-cooperation.yml
 例如：有个已经建立好的容器组 [ https://github.com/foxiswho/docker-compose-nginx-php-mysql ]，
 它网络是 `swoole` (查看所有网络命令:`docker network ls`)，
 
-```console
-$ docker-compose up -f docker-compose-cooperation-swoole.yml
+```bash
+docker-compose up -f docker-compose-cooperation-swoole.yml
 ```
 
 说明：主要在配置文件`docker-compose-cooperation-swoole.yml`中 有以下参数
