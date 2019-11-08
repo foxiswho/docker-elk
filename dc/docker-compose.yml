@@ -33,9 +33,10 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
+      - ./logstash/data:/usr/share/logstash/data
+      - ./logstash/logs:/usr/share/logstash/logs
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:rw
-      - ./logstash/logs:/usr/share/logstash/logs:rw
     ports:
       - "5000:5000"
     environment:
