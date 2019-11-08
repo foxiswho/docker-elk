@@ -66,41 +66,39 @@ curl -H "Content-Type: application/json" -XPUT "http://127.0.0.1:9200/goods" -d 
           }
     },
     "mappings" : {
-        "_doc" : {
             "dynamic" : true,
             "properties" : {
                 "title" : {
                     "type" : "text",
                     "analyzer" : "ik_syno_max",
                     "search_analyzer": "ik_syno_max"
-			,"fields": {
-		            "cn": {
-		              "type": "text",
-		              "analyzer": "ik_syno_max"
-		            },
-		            "en": {
-		              "type": "text",
-		              "analyzer": "english"
-		            }
-		          }
+                    ,"fields": {
+                      "cn": {
+                        "type": "text",
+                        "analyzer": "ik_syno_max"
+                      },
+                      "en": {
+                        "type": "text",
+                        "analyzer": "english"
+                      }
+                    }
                 },
                 "title_all" : {
                     "type" : "text",
                     "analyzer" : "ik_syno_max",
                     "search_analyzer": "ik_syno_max"
-		   ,"fields": {
-		            "cn": {
-		              "type": "text",
-		              "analyzer": "ik_syno_max"
-		            },
-		            "en": {
-		              "type": "text",
-		              "analyzer": "english"
-		            }
-		          }
+                     ,"fields": {
+                        "cn": {
+                          "type": "text",
+                          "analyzer": "ik_syno_max"
+                        },
+                        "en": {
+                          "type": "text",
+                          "analyzer": "english"
+                        }
+                    }
                 }
             }
-        }
     }
 }'
 
