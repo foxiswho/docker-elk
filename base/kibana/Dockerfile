@@ -1,4 +1,4 @@
-ARG ELK_VERSION=7.6.1
+ARG ELK_VERSION=7.6.2
 
 # https://github.com/elastic/kibana-docker
 FROM docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
