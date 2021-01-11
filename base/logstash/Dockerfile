@@ -1,4 +1,4 @@
-ARG ELK_VERSION=7.6.2
+ARG ELK_VERSION=7.10.1
 
 # https://github.com/elastic/logstash-docker
 FROM docker.elastic.co/logstash/logstash-oss:${ELK_VERSION}
