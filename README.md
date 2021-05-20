@@ -1,10 +1,9 @@
 # 拉取docker 所需文件
 可以执行命令，也可以直接使用下载 压缩包
 ```shell
-git clone https://github.com/foxiswho/docker-elk.git
-
-cd docker-elk
+git clone https://github.com/foxiswho/docker-elk.git && cd docker-elk && cd dc && chmod +x ./start.sh && ./start.sh
 ```
+自动部署 elasticsearch logstash kibana
 
 # elasticsearch logstash kibana
 
