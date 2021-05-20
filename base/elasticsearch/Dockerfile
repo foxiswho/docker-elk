@@ -6,7 +6,7 @@ FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
 # Add your elasticsearch plugins setup here
 # Example: RUN elasticsearch-plugin install analysis-icu
 
-ENV ELK_VERSION=7.6.2
+ENV ELK_VERSION=7.10.1
 
 # https://github.com/medcl/elasticsearch-analysis-ik
 
